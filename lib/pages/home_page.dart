@@ -19,6 +19,11 @@ final Uri _urlKofi = Uri.parse('https://ko-fi.com/thriveengineer');
 final Uri _urlUpwork = Uri.parse('https://www.upwork.com/freelancers/~01f5b2ffcbe90b7e83?mp_source=share');
 final Uri _urlFiverr = Uri.parse('https://www.fiverr.com/kresstein?source=gig_page&gigs=slug%3Adevelop-a-mobile-app-for-you%2Cpckg_id%3A1&ref=seller_language%3Ade%7Cgig_price_range%3A0%2C120');
 
+// Projects
+final Uri _urlBraveApi = Uri.parse('https://github.com/ThriveEngineer/brave_api');
+final Uri _urlGriveSearch = Uri.parse('https://github.com/ThriveEngineer/Grive-Search');
+final Uri _urlNothingNotes = Uri.parse('https://github.com/ThriveEngineer/nothing.notes');
+final Uri _urlMessages = Uri.parse('https://github.com/ThriveEngineer/messages');
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -75,6 +80,30 @@ Future<void> _launchUrlUpwork() async {
 
 Future<void> _launchUrlFiverr() async {
   if (!await launchUrl(_urlFiverr)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlBraveApi() async {
+  if (!await launchUrl(_urlBraveApi)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlGriveSearch() async {
+  if (!await launchUrl(_urlGriveSearch)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlNothingNotes() async {
+  if (!await launchUrl(_urlNothingNotes)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlMessages() async {
+  if (!await launchUrl(_urlMessages)) {
     throw Exception('Could not launch');
   }
 }
@@ -307,121 +336,213 @@ Route _HomeRoute() {
           // Site
           Expanded(
             child: Container(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 278),
-                child: Column(
-                  children: [
-
-                    // Latest Work Container
-                    Container(
-                      width: 1000,
-                      height: 315,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 16, 15, 15),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                      ),
-                      child: Row(
+              child: SingleChildScrollView(
+                child: Expanded(
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 278),
+                      child: Column(
                         children: [
 
-                          // Text Section
-                          Padding(
-                            padding: const EdgeInsets.only(top: 120, left: 30),
-                            child: Column(
-                              children: [
+                          Text(
+                            "Luis Schröder",
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Color.fromARGB(255, 206, 205, 195),
+                              fontWeight: FontWeight.w600
+                            ),
+                            ),
 
-                                // Heading Text
-                                   Text("Brave API Package",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 206, 205, 195)
-                                    )),
+                            Text(
+                            "Hi, My name is Luis, I'm a Developer from Germany",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Color.fromARGB(255, 135, 133, 128),
+                              fontWeight: FontWeight.w200
+                            ),
+                            ),
 
-                                    Container(
-                                        width: 500,
-                                        child: Column(
-                                          children: [
+                            SizedBox(height: 20,),
+                
+                          // Latest Work Container
+                          InkWell(
+                            onTap: () {
+                              _launchUrlBraveApi();
+                            },
 
-                                            // Description Text
-                                            Text(
-                                              "The Brave API Package is a Package for Flutter",
-                                              style: TextStyle(
-                                                color: Color.fromARGB(255, 147, 147, 147),
-                                                fontSize: 16,
+                            onHover: (value) {
+
+                            },
+                            child: Container(
+                              width: 1000,
+                              height: 315,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: Row(
+                                children: [
+                                            
+                                  // Text Section
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 120, left: 30),
+                                    child: Column(
+                                      children: [
+                                            
+                                        // Heading Text
+                                           Text("Brave API Package",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromARGB(255, 206, 205, 195)
+                                            )),
+                                            
+                                            Container(
+                                                width: 500,
+                                                child: Column(
+                                                  children: [
+                                            
+                                                    // Description Text
+                                                    Text(
+                                                      "The Brave API Package is a Package for Flutter",
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(255, 147, 147, 147),
+                                                        fontSize: 16,
+                                                      ),
+                                                      ),
+                                            
+                                                      Text(
+                                                        "that allows you to use the Brave Search API easily.",
+                                                        style: TextStyle(
+                                                        color: Color.fromARGB(255, 147, 147, 147),
+                                                        fontSize: 16,
+                                                      ),
+                                                     ),
+                                                  ],
+                                                ),
                                               ),
+                                      ],
+                                    ),
+                                  ),
+                                            
+                                  // Image
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 170),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: Image.asset(
+                                              "lib/assets/BraveAPI.jpg", 
+                                              width: 285, height: 285,
                                               ),
-
-                                              Text(
-                                                "that allows you to use the Brave Browser API easily.",
-                                                style: TextStyle(
-                                                color: Color.fromARGB(255, 147, 147, 147),
-                                                fontSize: 16,
-                                              ),
-                                             ),
-                                          ],
+                                          ),
                                         ),
+                                ],
+                              ),
+                            ),
+                          ),
+                
+                          SizedBox(height: 20,),
+                
+                          Container(
+                            width: 1005,
+                            child: Row(
+                              children: [
+                            
+                                // Work Container 1
+                                  InkWell(
+                                    onTap: () {
+                                      _launchUrlGriveSearch();
+                                    },
+                                    child: Container(
+                                      width: 318,
+                                      height: 315,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 16, 15, 15),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
                                       ),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            "lib/assets/GriveSearch.jpg",
+                                            width: 315, height: 315,
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                            
+                                SizedBox(width: 20,),
+                            
+                                // Work Container 2
+                                  InkWell(
+                                    onTap: () {
+                                      _launchUrlNothingNotes();
+                                    },
+                                    child: Container(
+                                      width: 667,
+                                      height: 315,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 16, 15, 15),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                    
+                                          // Image
+                                          Image.asset(
+                                                      "lib/assets/NothingNotes.jpg", 
+                                                      width: 665, height: 315,
+                                                      ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                
+                          SizedBox(height: 20,),
+                
+                          Container(
+                            width: 1005,
+                            child: Row(
+                              children: [
+                            
+                                // Work Container 3
+                                  InkWell(
+                                    onTap: () {
+                                      _launchUrlMessages();
+                                    },
+                                    child: Container(
+                                      width: 1000,
+                                      height: 1000,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 16, 15, 15),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            "lib/assets/Messages.jpg",
+                                            width: 998, height: 1000,
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
 
-                          // Image
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 170),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      "lib/assets/BraveAPI.jpg", 
-                                      width: 285, height: 285,
-                                      ),
-                                  ),
-                                ),
-                        ],
-                      ),
+                          SizedBox(height: 278,),
+                      ]),
                     ),
-
-                    SizedBox(height: 20,),
-
-                    Row(
-                      children: [
-
-                        // Work Container 1
-                        Container(
-                          width: 315,
-                          height: 315,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 16, 15, 15),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                          ),
-                        ),
-
-                        SizedBox(width: 20,),
-
-                        // Work Container 2
-                        Container(
-                          width: 667,
-                          height: 315,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 16, 15, 15),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                          ),
-                          child: Row(
-                            children: [
-                        
-                              // Image
-                              Image.asset(
-                                          "lib/assets/NothingNotes.jpg", 
-                                          width: 665, height: 315,
-                                          ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                ]),
+                  ),
+                ),
               ),
             ),
           ),

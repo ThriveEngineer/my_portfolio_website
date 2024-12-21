@@ -307,10 +307,60 @@ Route _HomeRoute() {
           // Site
           Expanded(
             child: Container(
-              child: Column(
-                children: [
-                Text("About", style: TextStyle(color: Colors.white),),
-              ]),
+              child: SingleChildScrollView(
+                child: Expanded(
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 105),
+                      child: Column(
+                        children: [
+                        Text(
+                          "Luis Schröder",
+                          style: TextStyle(
+                            fontSize: 50,
+                            color: Color.fromARGB(255, 206, 205, 195),
+                          ),
+                          ),
+
+                          Text(
+                            "Flutter Cross Platform Developer",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Color.fromARGB(255, 135, 133, 128),
+                              fontWeight: FontWeight.w200
+                            ),
+                            ),
+
+                            SizedBox(height: 45,),
+
+                            Container(
+                              width: 1000,
+                              child: Text(
+                                "Hi, I'm Luis, a cross-platform developer from Berlin, Germany. Despite being in 8th grade, I've already been developing mobile applications for over two years, primarily using Dart and the Flutter framework to create apps that work across different platforms.",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 151, 151, 151),
+                                  fontWeight: FontWeight.w200
+                                ),
+                                ),
+                            ),
+
+                            SizedBox(height: 20,),
+
+                            Container(
+                              width: 1000,
+                              child: Text("Beyond my school work and coding, I'm passionate about several hobbies. I love the art of coffee-making and enjoy experimenting with different brewing methods. I'm also into digital drawing, which lets me combine my technical skills with artistic expression. One of my favorite hobbies is building custom keyboards - there's something special about crafting the perfect typing experience. I've also gotten into 3D printing, which allows me to bring my digital designs into the real world. When I'm not doing any of these things, you might find me DJing, mixing tracks, and creating new soundscapes."
+                              ,style: TextStyle(
+                                fontSize: 20,
+                                    color: Color.fromARGB(255, 151, 151, 151),
+                                    fontWeight: FontWeight.w200
+                              )),
+                            ),
+                      ]),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
