@@ -401,7 +401,7 @@ Route _HomeRoute() {
 
                         // Work Container 2
                         Container(
-                          width: 665,
+                          width: 667,
                           height: 315,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 16, 15, 15),
