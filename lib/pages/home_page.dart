@@ -4,12 +4,120 @@ import 'package:portfolio/components/my_text_assets.dart';
 import 'package:portfolio/components/my_text_icon.dart';
 import 'package:portfolio/pages/about_page.dart';
 import 'package:portfolio/pages/portfolio_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// F I N D   M E   O N
+final Uri _urlGithub = Uri.parse('https://github.com/ThriveEngineer');
+final Uri _urlReddit = Uri.parse('https://www.reddit.com/user/kresstein');
+final Uri _urlBluesky = Uri.parse('https://bsky.app/profile/thriveengineer.bsky.social');
+final Uri _urlThreads = Uri.parse('https://www.threads.net/@thrive.dev');
+final Uri _urlMastodon = Uri.parse('https://mastodon.social/@ThriveEngineer');
+final Uri _urlRead = Uri.parse('https://read.cv/thrive.dev');
+final Uri _urlKofi = Uri.parse('https://ko-fi.com/thriveengineer');
+
+// H I R E   M E
+final Uri _urlUpwork = Uri.parse('https://www.upwork.com/freelancers/~01f5b2ffcbe90b7e83?mp_source=share');
+final Uri _urlFiverr = Uri.parse('https://www.fiverr.com/kresstein?source=gig_page&gigs=slug%3Adevelop-a-mobile-app-for-you%2Cpckg_id%3A1&ref=seller_language%3Ade%7Cgig_price_range%3A0%2C120');
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _launchUrlGithub() async {
+  if (!await launchUrl(_urlGithub)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlReddit() async {
+  if (!await launchUrl(_urlReddit)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlBluesky() async {
+  if (!await launchUrl(_urlBluesky)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlThreads() async {
+  if (!await launchUrl(_urlThreads)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlMastodon() async {
+  if (!await launchUrl(_urlMastodon)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlRead() async {
+  if (!await launchUrl(_urlRead)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlKofi() async {
+  if (!await launchUrl(_urlKofi)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlUpwork() async {
+  if (!await launchUrl(_urlUpwork)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlFiverr() async {
+  if (!await launchUrl(_urlFiverr)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Route _PortfolioRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const PortfolioPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  const begin = Offset(0.0, 0.0);
+  const end = Offset.zero;
+  final tween = Tween(begin: begin, end: end);
+  final offsetAnimation = animation.drive(tween);
+  return child;
+},
+  );
+}
+
+Route _AboutRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const AboutPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  const begin = Offset(0.0, 0.0);
+  const end = Offset.zero;
+  final tween = Tween(begin: begin, end: end);
+  final offsetAnimation = animation.drive(tween);
+  return child;
+},
+  );
+}
+
+Route _HomeRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  const begin = Offset(0.0, 0.0);
+  const end = Offset.zero;
+  final tween = Tween(begin: begin, end: end);
+  final offsetAnimation = animation.drive(tween);
+  return child;
+},
+  );
+}
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Row(
@@ -24,8 +132,8 @@ class HomePage extends StatelessWidget {
                 width: 266,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color.fromARGB(255, 16, 15, 15),
-                  border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                  color: const Color.fromARGB(255, 16, 15, 15),
+                  border: Border.all(color: const Color.fromARGB(255, 40, 39, 38)),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -41,7 +149,7 @@ class HomePage extends StatelessWidget {
                                 ),
                             ),
 
-                            SizedBox(width: 13,),
+                            const SizedBox(width: 13,),
 
                           const Text(
                             "Thrive Engineer",
@@ -54,97 +162,141 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
 
-                      SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
 
-                      Divider(
+                      const Divider(
                         color: Color.fromARGB(255, 41, 40, 38),
                         indent: 0,
                         endIndent: 0,
                         ),
 
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
 
-                        Text("P A G E S",
+                        const Text("P A G E S",
                         style: TextStyle(
                           fontSize: 12,
                           color: Color.fromARGB(255, 88, 89, 90)
                         ),
                         ),
 
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         MyButton(text: "Home", icon: Icons.home_rounded, onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                          Navigator.of(context).push(_HomeRoute());
                         },
                        ),
 
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
 
                        MyButton(text: "About", icon: Icons.info_rounded, onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()),);
+                        Navigator.of(context).push(_AboutRoute());
                        }),
 
-                       SizedBox(height: 10,),
+                       const SizedBox(height: 10,),
 
                        MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: ()
                        {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PortfolioPage()));
+                        Navigator.of(context).push(_PortfolioRoute());
                        },
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       Divider(
+                       const Divider(
                         color: Color.fromARGB(255, 41, 40, 38),
                         indent: 0,
                         endIndent: 0,
                         ),
 
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
 
-                        Text("F I N D   M E   O N",
+                        const Text("F I N D   M E   O N",
                         style: TextStyle(
                           fontSize: 12,
                           color: Color.fromARGB(255, 88, 89, 90)
                         ),
                         ),
 
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
 
                         MyTextIcon(icon: Icons.reddit_rounded, text: "Reddit", onTap: () {
-
+                          _launchUrlReddit();
                         },
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/bluesky.jpg", text: "Bluesky", onTap: () {}
+                       MyTextAssets(name: "lib/assets/bluesky.jpg", text: "Bluesky", onTap: () {
+                         _launchUrlBluesky();
+                       }
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/threads.jpg", text: "Threads", onTap: () {}
+                       MyTextAssets(name: "lib/assets/threads.jpg", text: "Threads", onTap: () {
+                         _launchUrlThreads();
+                       }
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/mastodon.jpg", text: "Mastodon", onTap: () {}
+                       MyTextAssets(name: "lib/assets/mastodon.jpg", text: "Mastodon", onTap: () {
+                         _launchUrlMastodon();
+                       }
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/read.jpg", text: "read.cv", onTap: () {}
+                       MyTextAssets(name: "lib/assets/read.jpg", text: "read.cv", onTap: () {
+                         _launchUrlRead();
+                       }
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/github.jpg", text: "GitHub", onTap: () {}
+                       MyTextAssets(name: "lib/assets/github.jpg", text: "GitHub", onTap: () {
+                         _launchUrlGithub();
+                       }
                        ),
 
-                       SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
 
-                       MyTextAssets(name: "lib/assets/kofi.jpg", text: "Kofi", onTap: () {}
+                       MyTextAssets(name: "lib/assets/kofi.jpg", text: "Kofi", onTap: () {
+                         _launchUrlKofi();
+                       }
                        ),
+
+                       const SizedBox(height: 15,),
+
+                       const Divider(
+                        color: Color.fromARGB(255, 41, 40, 38),
+                        indent: 0,
+                        endIndent: 0,
+                       ),
+
+                       const SizedBox(height: 15,),
+
+                       const Text(
+                        "H I R E   M E",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 88, 89, 90)
+                        ),
+                        ),
+
+                        const SizedBox(height: 10,),
+
+                        MyTextAssets(name: "lib/assets/upwork.jpg", text: "Upwork", onTap: () {
+                          _launchUrlUpwork();
+                        },
+                       ),
+
+                       const SizedBox(height: 15,),
+
+                       MyTextAssets(name: "lib/assets/fiverr.png", text: "Fiverr", onTap: () {
+                        _launchUrlFiverr();
+                       },
+                      ),
                     ],
                   ),
                 ),
@@ -157,7 +309,7 @@ class HomePage extends StatelessWidget {
             child: Container(
               child: Column(
                 children: [
-                
+                Text("Home", style: TextStyle(color: Colors.white),),
               ]),
             ),
           ),
