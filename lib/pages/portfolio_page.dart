@@ -309,7 +309,12 @@ Route _HomeRoute() {
             child: Container(
               child: Column(
                 children: [
-                Text("Portfolio", style: TextStyle(color: Colors.white),),
+                Text("Coming Sooooooon!",
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromARGB(255, 206, 205, 195),
+                ))
               ]),
             ),
           ),

@@ -306,10 +306,7 @@ Route _HomeRoute() {
 
           // Site
           Expanded(
-            child: Container(
               child: SingleChildScrollView(
-                child: Expanded(
-                  child: Container(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 105),
                       child: Column(
@@ -358,10 +355,7 @@ Route _HomeRoute() {
                             ),
                       ]),
                     ),
-                  ),
-                ),
               ),
-            ),
           ),
         ],
       ),
