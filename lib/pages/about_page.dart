@@ -181,7 +181,7 @@ Route _HomeRoute() {
 
                         const SizedBox(height: 10,),
 
-                        MyButton(text: "Home", icon: Icons.home_rounded, onTap: () {
+                        MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: () {
                           Navigator.of(context).push(_HomeRoute());
                         },
                        ),
@@ -194,7 +194,7 @@ Route _HomeRoute() {
 
                        const SizedBox(height: 10,),
 
-                       MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: ()
+                       MyButton(text: "Resume", icon: Icons.description_rounded, onTap: ()
                        {
                         Navigator.of(context).push(_PortfolioRoute());
                        },

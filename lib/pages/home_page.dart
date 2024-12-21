@@ -181,7 +181,7 @@ Route _HomeRoute() {
 
                         const SizedBox(height: 10,),
 
-                        MyButton(text: "Home", icon: Icons.home_rounded, onTap: () {
+                        MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: () {
                           Navigator.of(context).push(_HomeRoute());
                         },
                        ),
@@ -194,7 +194,7 @@ Route _HomeRoute() {
 
                        const SizedBox(height: 10,),
 
-                       MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: ()
+                       MyButton(text: "Resume", icon: Icons.description_rounded, onTap: ()
                        {
                         Navigator.of(context).push(_PortfolioRoute());
                        },
@@ -307,10 +307,122 @@ Route _HomeRoute() {
           // Site
           Expanded(
             child: Container(
-              child: Column(
-                children: [
-                Text("Home", style: TextStyle(color: Colors.white),),
-              ]),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 278),
+                child: Column(
+                  children: [
+
+                    // Latest Work Container
+                    Container(
+                      width: 1000,
+                      height: 315,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 16, 15, 15),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                      ),
+                      child: Row(
+                        children: [
+
+                          // Text Section
+                          Padding(
+                            padding: const EdgeInsets.only(top: 120, left: 30),
+                            child: Column(
+                              children: [
+
+                                // Heading Text
+                                   Text("Brave API Package",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 206, 205, 195)
+                                    )),
+
+                                    Container(
+                                        width: 500,
+                                        child: Column(
+                                          children: [
+
+                                            // Description Text
+                                            Text(
+                                              "The Brave API Package is a Package for Flutter",
+                                              style: TextStyle(
+                                                color: Color.fromARGB(255, 147, 147, 147),
+                                                fontSize: 16,
+                                              ),
+                                              ),
+
+                                              Text(
+                                                "that allows you to use the Brave Browser API easily.",
+                                                style: TextStyle(
+                                                color: Color.fromARGB(255, 147, 147, 147),
+                                                fontSize: 16,
+                                              ),
+                                             ),
+                                          ],
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+
+                          // Image
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 170),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      "lib/assets/BraveAPI.jpg", 
+                                      width: 285, height: 285,
+                                      ),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20,),
+
+                    Row(
+                      children: [
+
+                        // Work Container 1
+                        Container(
+                          width: 315,
+                          height: 315,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 16, 15, 15),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                          ),
+                        ),
+
+                        SizedBox(width: 20,),
+
+                        // Work Container 2
+                        Container(
+                          width: 665,
+                          height: 315,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 16, 15, 15),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                          ),
+                          child: Row(
+                            children: [
+                        
+                              // Image
+                              Image.asset(
+                                          "lib/assets/NothingNotes.jpg", 
+                                          width: 665, height: 315,
+                                          ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                ]),
+              ),
             ),
           ),
         ],
