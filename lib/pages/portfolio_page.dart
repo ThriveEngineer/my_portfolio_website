@@ -306,17 +306,266 @@ Route _HomeRoute() {
 
           // Site
           Expanded(
-            child: Container(
-              child: Column(
-                children: [
-                Text("Coming Sooooooon!",
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 206, 205, 195),
-                ))
-              ]),
-            ),
+              child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 278),
+                      child: Column(
+                        children: [
+
+                          Text(
+                            "Luis Schröder",
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Color.fromARGB(255, 206, 205, 195),
+                              fontWeight: FontWeight.w600
+                            ),
+                            ),
+
+                            Text(
+                            "Resume",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Color.fromARGB(255, 135, 133, 128),
+                              fontWeight: FontWeight.w200
+                            ),
+                            ),
+
+                            SizedBox(height: 20,),
+
+                            Text("Certifications / Awards",
+                            style: TextStyle(
+                              fontSize: 20, 
+                              color: Color.fromARGB(255, 151, 151, 151)
+                              ),
+                             ),
+
+                             SizedBox(height: 10,),
+                
+                          // Work Container
+                            Container(
+                              width: 1000,
+                              height: 630,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: Row(
+                                children: [
+                                            
+                                  // Text Section
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 280, left: 300),
+                                    child: Column(
+                                      children: [
+                                            
+                                        // Heading Text
+                                           Text("Nothing here yet!",
+                                            style: TextStyle(
+                                              fontSize: 50,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromARGB(255, 206, 205, 195)
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                
+                          SizedBox(height: 20,),
+
+                          Text("RELEVANT EXPERIENCE",
+                            style: TextStyle(
+                              fontSize: 20, 
+                              color: Color.fromARGB(255, 151, 151, 151)
+                              ),
+                             ),
+
+                             SizedBox(height: 10,),
+                
+                          Container(
+                            width: 1005,
+                            child: Column(
+                              children: [
+                            
+                                // Work Container 1
+                                  Container(
+                              width: 1000,
+                              height: 315,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: Row(
+                                children: [
+                                            
+                                  // Text Section
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 100, left: 30),
+                                    child: Column(
+                                      children: [
+
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(255, 52, 51, 49),
+                                            borderRadius: BorderRadius.circular(5),
+                                            border: Border.all(color: Color.fromARGB(255, 73, 71, 69)),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "October 2024 - Present",
+                                              style: TextStyle(
+                                                color: Color.fromARGB(255, 147, 147, 147),
+                                              ),
+                                              ),
+                                          ),
+                                        ),
+
+                                        SizedBox(height: 10,),
+                                            
+                                        // Heading Text
+                                           Text("Self Employed Freelancer",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromARGB(255, 206, 205, 195)
+                                            )),
+                                            
+                                            Container(
+                                                width: 500,
+                                                child: Column(
+                                                  children: [
+                                            
+                                                    // Description Text
+                                                    Text(
+                                                      "Developing Mobile Flutter Apps,",
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(255, 147, 147, 147),
+                                                        fontSize: 16,
+                                                      ),
+                                                      ),
+                                            
+                                                      Text(
+                                                        " as a Freelancer on Fiverr and Upwork.",
+                                                        style: TextStyle(
+                                                        color: Color.fromARGB(255, 147, 147, 147),
+                                                        fontSize: 16,
+                                                      ),
+                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                            
+                                  // Image
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 170),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: Image.asset(
+                                              "lib/assets/self_employed.png", 
+                                              width: 285, height: 285,
+                                              ),
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: 20,),
+
+                            // Work Container 2
+                                  Container(
+                              width: 1000,
+                              height: 315,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: Row(
+                                children: [
+                                            
+                                  // Text Section
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 100, left: 30),
+                                    child: Column(
+                                      children: [
+
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Color.fromARGB(255, 52, 51, 49),
+                                            borderRadius: BorderRadius.circular(5),
+                                            border: Border.all(color: Color.fromARGB(255, 73, 71, 69)),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "May 2024 - Present",
+                                              style: TextStyle(
+                                                color: Color.fromARGB(255, 147, 147, 147),
+                                              ),
+                                              ),
+                                          ),
+                                        ),
+
+                                        SizedBox(height: 10,),
+                                            
+                                        // Heading Text
+                                           Text("Self Employed Developer",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromARGB(255, 206, 205, 195)
+                                            )),
+                                            
+                                            Container(
+                                                width: 500,
+                                                child: Column(
+                                                  children: [
+                                            
+                                                    // Description Text
+                                                    Text(
+                                                      "Developing Open Source stuff.",
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(255, 147, 147, 147),
+                                                        fontSize: 16,
+                                                      ),
+                                                      ),
+                                                  ],
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                            
+                                  // Image
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 170),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: Image.asset(
+                                              "lib/assets/thrive_logo.png", 
+                                              width: 285, height: 285,
+                                              ),
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ),
+
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 278,),
+                      ]),
+                    ),
+              ),
           ),
         ],
       ),
