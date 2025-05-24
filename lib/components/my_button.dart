@@ -4,8 +4,10 @@ class MyButton extends StatelessWidget {
   final String text;
   final IconData? icon;
   final void Function()? onTap;
+  final double? sizedBox;
   const MyButton({
     super.key,
+    required this.sizedBox,
     required this.text,
     required this.icon,
     required this.onTap
@@ -28,7 +30,7 @@ class MyButton extends StatelessWidget {
               Icon(icon,
               color: Colors.white,
               ),
-              const SizedBox(width: 9,),
+              SizedBox(width: sizedBox),
               Text(text, 
               style: TextStyle(
                 color: Colors.white

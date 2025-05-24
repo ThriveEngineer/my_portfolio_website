@@ -3,7 +3,9 @@ import 'package:portfolio/components/my_button.dart';
 import 'package:portfolio/components/my_text_assets.dart';
 import 'package:portfolio/components/my_text_icon.dart';
 import 'package:portfolio/pages/about_page.dart';
+import 'package:portfolio/pages/find_me_on.dart';
 import 'package:portfolio/pages/portfolio_page.dart';
+import 'dart:ui'; // Import for ImageFilter
 import 'package:url_launcher/url_launcher.dart';
 
 // F I N D   M E   O N
@@ -24,6 +26,9 @@ final Uri _urlBraveApi = Uri.parse('https://github.com/ThriveEngineer/brave_api'
 final Uri _urlGriveSearch = Uri.parse('https://github.com/ThriveEngineer/Grive-Search');
 final Uri _urlNothingNotes = Uri.parse('https://github.com/ThriveEngineer/nothing.notes');
 final Uri _urlMessages = Uri.parse('https://github.com/ThriveEngineer/messages');
+
+// Project
+final Uri _urlMyle = Uri.parse('https://myle.framer.media/');
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -32,6 +37,12 @@ class HomePage extends StatelessWidget {
 
     Future<void> _launchUrlGithub() async {
   if (!await launchUrl(_urlGithub)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlMyle() async {
+  if (!await launchUrl(_urlMyle)) {
     throw Exception('Could not launch');
   }
 }
@@ -108,6 +119,7 @@ Future<void> _launchUrlMessages() async {
   }
 }
 
+
 Route _PortfolioRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const PortfolioPage(),
@@ -147,13 +159,98 @@ Route _HomeRoute() {
   );
 }
 
+Route _FindMeOnRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const FindMeOn(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  const begin = Offset(0.0, 0.0);
+  const end = Offset.zero;
+  final tween = Tween(begin: begin, end: end);
+  final offsetAnimation = animation.drive(tween);
+  return child;
+},
+  );
+}
+
+ final mediaQueryData = MediaQuery.of(context);
+ final currentWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Row(
+        appBar: currentWidth < 1400
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight), // Default AppBar height
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 120.0, sigmaY: 120.0), // Adjust blur intensity
+                    child: AppBar(
+                      title: Row(
+                        children: [
+                          ClipOval(
+                              child: Image.asset(
+                                "lib/assets/Luis.png",
+                                width: 35,
+                                height: 35,
+                                ),
+                            ),
+                            
+                            SizedBox(width: 10,),
+
+                          Text(
+                                "Luis S.",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 206, 205, 195),
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "MonaSans",
+                                ),
+                                ),
+                        ],
+                      ),
+                      // leading: null, // This is no longer needed when automaticallyImplyLeading is false
+                      automaticallyImplyLeading: false,
+                      actions: [
+
+                        MyButton(text: currentWidth > 750 ? "Portfolio" : "", icon: Icons.folder_rounded, onTap: () {
+                        Navigator.of(context).push(_HomeRoute());
+                       }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "About" : "", icon: Icons.info_rounded, onTap: () {
+                        Navigator.of(context).push(_AboutRoute());
+                       }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "Resume" : "", icon: Icons.description_rounded, onTap: ()
+                       {
+                        Navigator.of(context).push(_PortfolioRoute());
+                       }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "Find me on" : "", icon: Icons.add_box_rounded, onTap: () {
+                          Navigator.of(context).push(_FindMeOnRoute());
+                        }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       SizedBox(width: 20,),
+                      ],
+                      elevation: 0,
+                      backgroundColor: const Color.fromARGB(14, 24, 24, 24), // Make color semi-transparent
+                    ),
+                  ),
+                ),
+              )
+            : null,
+       body: Row(
         children: [
 
           // Sidebar
-          Expanded(
+          currentWidth > 1400 ? Expanded(
             flex: 0,
             child: Padding(
               padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
@@ -172,7 +269,7 @@ Route _HomeRoute() {
                         children: [
                             ClipOval(
                               child: Image.asset(
-                                "lib/assets/thrive_logo.png",
+                                "lib/assets/Luis.png",
                                 width: 45,
                                 height: 45,
                                 ),
@@ -181,7 +278,7 @@ Route _HomeRoute() {
                             const SizedBox(width: 13,),
 
                           const Text(
-                            "Thrive Engineer",
+                            "Luis Schröder",
                             style: TextStyle(
                               color: Color.fromARGB(255, 206, 205, 195),
                               fontWeight: FontWeight.w600,
@@ -212,24 +309,40 @@ Route _HomeRoute() {
 
                         MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: () {
                           Navigator.of(context).push(_HomeRoute());
-                        },
+                        }, sizedBox: 9,
                        ),
 
                        const SizedBox(height: 10,),
 
                        MyButton(text: "About", icon: Icons.info_rounded, onTap: () {
                         Navigator.of(context).push(_AboutRoute());
-                       }),
+                       }, sizedBox: 9,
+                       ),
 
                        const SizedBox(height: 10,),
 
                        MyButton(text: "Resume", icon: Icons.description_rounded, onTap: ()
                        {
                         Navigator.of(context).push(_PortfolioRoute());
-                       },
+                       }, sizedBox: 9,
                        ),
 
-                       const SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
+
+                        Divider(
+                          color: Color.fromARGB(255, 41, 40, 38),
+                          indent: 0,
+                          endIndent: 0,
+                        ),
+
+                        const SizedBox(height: 15,),
+
+                        MyTextAssets(name: "lib/assets/myle_logo.png", text: "Myle", onTap: () {
+                         _launchUrlMyle();
+                       }
+                       ),
+
+                        const SizedBox(height: 15,),
 
                        const Divider(
                         color: Color.fromARGB(255, 41, 40, 38),
@@ -331,215 +444,305 @@ Route _HomeRoute() {
                 ),
               ),
             ),
-          ),
+          ) : SizedBox(width: 0,),
 
           // Site
-          Expanded(
-              child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 278),
-                      child: Column(
-                        children: [
+Expanded(
+    child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: currentWidth > 800 ? 278 : currentWidth > 480 ? 150 : 100,
+              left: currentWidth > 600 ? 0 : currentWidth > 400 ? 16 : 12,
+              right: currentWidth > 600 ? 0 : currentWidth > 400 ? 16 : 12,
+            ),
+            child: Column(
+              children: [
 
-                          Text(
-                            "Luis Schröder",
-                            style: TextStyle(
-                              fontSize: 50,
-                              color: Color.fromARGB(255, 206, 205, 195),
-                              fontWeight: FontWeight.w600
-                            ),
-                            ),
+                Text(
+                  "Luis Schröder",
+                  style: TextStyle(
+                    fontSize: currentWidth > 800 ? 50 : currentWidth > 480 ? 32 : 24,
+                    color: Color.fromARGB(255, 206, 205, 195),
+                    fontWeight: FontWeight.w600
+                  ),
+                  textAlign: TextAlign.center,
+                  ),
 
-                            Text(
-                            "Hi, My name is Luis, I'm a Developer from Germany",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Color.fromARGB(255, 135, 133, 128),
-                              fontWeight: FontWeight.w200
-                            ),
-                            ),
+                  SizedBox(height: currentWidth <= 400 ? 8 : 12),
 
-                            SizedBox(height: 20,),
-                
-                          // Latest Work Container
-                          InkWell(
-                            onTap: () {
-                              _launchUrlBraveApi();
-                            },
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: currentWidth > 600 ? 0 : currentWidth > 400 ? 20 : 16,
+                    ),
+                    child: Text(
+                      currentWidth <= 400 
+                        ? "Hi, I'm Luis, a Developer from Germany"
+                        : "Hi, My name is Luis, I'm a Developer from Germany",
+                      style: TextStyle(
+                        fontSize: currentWidth > 800 ? 25 : currentWidth > 480 ? 18 : 14,
+                        color: Color.fromARGB(255, 135, 133, 128),
+                        fontWeight: FontWeight.w200
+                      ),
+                      textAlign: TextAlign.center,
+                      ),
+                  ),
 
-                            onHover: (value) {
+                  SizedBox(height: currentWidth <= 400 ? 16 : 20),
+      
+                // Latest Work Container
+                InkWell(
+                  onTap: () {
+                    _launchUrlMyle();
+                  },
 
-                            },
-                            child: Container(
-                              width: 1000,
-                              height: 315,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 16, 15, 15),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                              ),
-                              child: Row(
+                  onHover: (value) {
+
+                  },
+                  child: Container(
+                    width: currentWidth > 1000 ? 1000 : currentWidth > 400 ? currentWidth - 32 : currentWidth - 24,
+                    height: currentWidth > 800 ? 315 : currentWidth > 480 ? 250 : currentWidth > 400 ? 200 : 180,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 16, 15, 15),
+                      borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                      border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                    ),
+                    child: currentWidth > 800 
+                      ? Row(
+                          children: [
+                                      
+                            // Text Section
+                            Padding(
+                              padding: const EdgeInsets.only(top: 120, left: 30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                            
-                                  // Text Section
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 120, left: 30),
-                                    child: Column(
-                                      children: [
-                                            
-                                        // Heading Text
-                                           Text("Brave API Package",
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color.fromARGB(255, 206, 205, 195)
-                                            )),
-                                            
-                                            Container(
-                                                width: 500,
-                                                child: Column(
-                                                  children: [
-                                            
-                                                    // Description Text
-                                                    Text(
-                                                      "The Brave API Package is a Package for Flutter",
-                                                      style: TextStyle(
-                                                        color: Color.fromARGB(255, 147, 147, 147),
-                                                        fontSize: 16,
-                                                      ),
-                                                      ),
-                                            
-                                                      Text(
-                                                        "that allows you to use the Brave Search API easily.",
-                                                        style: TextStyle(
-                                                        color: Color.fromARGB(255, 147, 147, 147),
-                                                        fontSize: 16,
-                                                      ),
-                                                     ),
-                                                  ],
+                                      
+                                  // Heading Text
+                                     Text("Myle",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color.fromARGB(255, 206, 205, 195)
+                                      )),
+                                      
+                                      Container(
+                                          width: 400,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                      
+                                              // Description Text
+                                              Text(
+                                                "Myle the Browser that Adapts to you",
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(255, 147, 147, 147),
+                                                  fontSize: 16,
                                                 ),
-                                              ),
-                                      ],
-                                    ),
-                                  ),
-                                            
-                                  // Image
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 170),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(8),
-                                            child: Image.asset(
-                                              "lib/assets/BraveAPI.jpg", 
-                                              width: 285, height: 285,
-                                              ),
+                                                ),
+                                            ],
                                           ),
                                         ),
                                 ],
                               ),
                             ),
-                          ),
-                
-                          SizedBox(height: 20,),
-                
-                          Container(
-                            width: 1005,
-                            child: Row(
-                              children: [
-                            
-                                // Work Container 1
-                                  InkWell(
-                                    onTap: () {
-                                      _launchUrlGriveSearch();
-                                    },
-                                    child: Container(
-                                      width: 318,
-                                      height: 315,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 16, 15, 15),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            "lib/assets/GriveSearch.jpg",
-                                            width: 315, height: 315,
-                                            ),
-                                        ],
+                                      
+                            // Image
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          "lib/assets/myle_logo.png", 
+                                          fit: BoxFit.contain,
+                                          ),
                                       ),
                                     ),
                                   ),
-                            
-                                SizedBox(width: 20,),
-                            
-                                // Work Container 2
-                                  InkWell(
-                                    onTap: () {
-                                      _launchUrlNothingNotes();
-                                    },
-                                    child: Container(
-                                      width: 667,
-                                      height: 315,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 16, 15, 15),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                    
-                                          // Image
-                                          Image.asset(
-                                                      "lib/assets/NothingNotes.jpg", 
-                                                      width: 665, height: 315,
-                                                      ),
-                                        ],
-                                      ),
-                                    ),
+                          ],
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Mobile layout - stacked vertically
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(currentWidth <= 400 ? 6 : 8),
+                              child: Image.asset(
+                                "lib/assets/myle_logo.png", 
+                                width: currentWidth <= 400 ? 50 : currentWidth <= 480 ? 60 : 80,
+                                height: currentWidth <= 400 ? 50 : currentWidth <= 480 ? 60 : 80,
+                                fit: BoxFit.contain,
+                                ),
+                            ),
+                            SizedBox(height: currentWidth <= 400 ? 8 : 15),
+                            Text("Myle",
+                              style: TextStyle(
+                                fontSize: currentWidth <= 400 ? 14 : currentWidth <= 480 ? 16 : 18,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromARGB(255, 206, 205, 195)
+                              )),
+                            SizedBox(height: currentWidth <= 400 ? 4 : 8),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: currentWidth <= 400 ? 12 : 20),
+                              child: Text(
+                                currentWidth <= 400 
+                                  ? "Browser that Adapts to you"
+                                  : "Myle the Browser that Adapts to you",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 147, 147, 147),
+                                  fontSize: currentWidth <= 400 ? 11 : currentWidth <= 480 ? 12 : 14,
+                                ),
+                                textAlign: TextAlign.center,
+                                ),
+                            ),
+                          ],
+                        ),
+                  ),
+                ),
+      
+                SizedBox(height: currentWidth <= 400 ? 12 : 20),
+      
+                Container(
+                  width: currentWidth > 1000 ? 1005 : currentWidth > 400 ? currentWidth - 32 : currentWidth - 24,
+                  child: currentWidth > 800
+                    ? Row(
+                        children: [
+                      
+                          // Work Container 1
+                            Expanded(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () {
+                                  _launchUrlBraveApi();
+                                },
+                                child: Container(
+                                  height: 315,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 16, 15, 15),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
                                   ),
-                              ],
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      "lib/assets/BraveAPI.jpg",
+                                      fit: BoxFit.cover,
+                                      ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                      
+                          SizedBox(width: 20,),
+                      
+                          // Work Container 2
+                            Expanded(
+                              flex: 2,
+                              child: InkWell(
+                                onTap: () {
+                                  _launchUrlNothingNotes();
+                                },
+                                child: Container(
+                                  height: 315,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 16, 15, 15),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      "lib/assets/NothingNotes.jpg", 
+                                      fit: BoxFit.cover,
+                                      ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          // Mobile: Stack vertically
+                          InkWell(
+                            onTap: () {
+                              _launchUrlBraveApi();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: currentWidth > 480 ? 200 : currentWidth > 400 ? 160 : 140,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                                child: Image.asset(
+                                  "lib/assets/BraveAPI.jpg",
+                                  fit: BoxFit.cover,
+                                  ),
+                              ),
                             ),
                           ),
-                
-                          SizedBox(height: 20,),
-                
-                          Container(
-                            width: 1005,
-                            child: Row(
-                              children: [
-                            
-                                // Work Container 3
-                                  InkWell(
-                                    onTap: () {
-                                      _launchUrlMessages();
-                                    },
-                                    child: Container(
-                                      width: 1000,
-                                      height: 1000,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 16, 15, 15),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            "lib/assets/Messages.jpg",
-                                            width: 998, height: 1000,
-                                            ),
-                                        ],
-                                      ),
-                                    ),
+                          SizedBox(height: currentWidth <= 400 ? 12 : 20),
+                          InkWell(
+                            onTap: () {
+                              _launchUrlNothingNotes();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: currentWidth > 480 ? 200 : currentWidth > 400 ? 160 : 140,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 16, 15, 15),
+                                borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                                border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                                child: Image.asset(
+                                  "lib/assets/NothingNotes.jpg", 
+                                  fit: BoxFit.cover,
                                   ),
-                              ],
+                              ),
                             ),
                           ),
-
-                          SizedBox(height: 278,),
-                      ]),
+                        ],
+                      ),
+                ),
+      
+                SizedBox(height: currentWidth <= 400 ? 12 : 20),
+      
+                Container(
+                  width: currentWidth > 1000 ? 1005 : currentWidth > 400 ? currentWidth - 32 : currentWidth - 24,
+                  child: InkWell(
+                    onTap: () {
+                      _launchUrlMessages();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: currentWidth > 800 ? 600 : currentWidth > 600 ? 400 : currentWidth > 480 ? 300 : currentWidth > 400 ? 250 : 200,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 16, 15, 15),
+                        borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                        border: Border.all(color: Color.fromARGB(255, 40, 39, 38)),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(currentWidth <= 400 ? 8 : 12),
+                        child: Image.asset(
+                          "lib/assets/Messages.jpg",
+                          fit: BoxFit.cover,
+                          ),
+                      ),
                     ),
-              ),
+                  ),
+                ),
+
+                SizedBox(height: currentWidth > 800 ? 278 : currentWidth > 480 ? 150 : 100),
+            ]),
           ),
+    ),
+),
         ],
       ),
     );

@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/my_button.dart';
 import 'package:portfolio/components/my_text_assets.dart';
 import 'package:portfolio/components/my_text_icon.dart';
+import 'package:portfolio/pages/find_me_on.dart';
 import 'package:portfolio/pages/home_page.dart';
 import 'package:portfolio/pages/portfolio_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,6 +22,9 @@ final Uri _urlKofi = Uri.parse('https://ko-fi.com/thriveengineer');
 final Uri _urlUpwork = Uri.parse('https://www.upwork.com/freelancers/~01f5b2ffcbe90b7e83?mp_source=share');
 final Uri _urlFiverr = Uri.parse('https://www.fiverr.com/kresstein?source=gig_page&gigs=slug%3Adevelop-a-mobile-app-for-you%2Cpckg_id%3A1&ref=seller_language%3Ade%7Cgig_price_range%3A0%2C120');
 
+// Project
+final Uri _urlMyle = Uri.parse('https://myle.framer.media/');
+
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
@@ -27,6 +33,12 @@ class AboutPage extends StatelessWidget {
 
     Future<void> _launchUrlGithub() async {
   if (!await launchUrl(_urlGithub)) {
+    throw Exception('Could not launch');
+  }
+}
+
+Future<void> _launchUrlMyle() async {
+  if (!await launchUrl(_urlMyle)) {
     throw Exception('Could not launch');
   }
 }
@@ -118,13 +130,97 @@ Route _HomeRoute() {
   );
 }
 
+Route _FindMeOnRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const FindMeOn(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  const begin = Offset(0.0, 0.0);
+  const end = Offset.zero;
+  final tween = Tween(begin: begin, end: end);
+  final offsetAnimation = animation.drive(tween);
+  return child;
+},
+  );
+}
+
+final mediaQueryData = MediaQuery.of(context);
+ final currentWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: currentWidth < 1400
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight), // Default AppBar height
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 120.0, sigmaY: 120.0), // Adjust blur intensity
+                    child: AppBar(
+                      title: Row(
+                        children: [
+                          ClipOval(
+                              child: Image.asset(
+                                "lib/assets/Luis.png",
+                                width: 35,
+                                height: 35,
+                                ),
+                            ),
+                            
+                            SizedBox(width: 10,),
+
+                          Text(
+                                "Luis S.",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 206, 205, 195),
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "MonaSans",
+                                ),
+                                ),
+                        ],
+                      ),
+                      // leading: null, // This is no longer needed when automaticallyImplyLeading is false
+                      automaticallyImplyLeading: false,
+                      actions: [
+                        MyButton(text: currentWidth > 750 ? "Portfolio" : "", icon: Icons.folder_rounded, onTap: () {
+                          Navigator.of(context).push(_HomeRoute());
+                        }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "About" : "", icon: Icons.info_rounded, onTap: () {
+                        Navigator.of(context).push(_AboutRoute());
+                       }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "Resume" : "", icon: Icons.description_rounded, onTap: ()
+                       {
+                        Navigator.of(context).push(_PortfolioRoute());
+                       }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       const SizedBox(width: 10,),
+
+                       MyButton(text: currentWidth > 750 ? "Find me on" : "", icon: Icons.add_box_rounded, onTap: () {
+                          Navigator.of(context).push(_FindMeOnRoute());
+                        }, sizedBox: currentWidth > 600 ? 9 : 0,
+                       ),
+
+                       SizedBox(width: 20,),
+                      ],
+                      elevation: 0,
+                      backgroundColor: const Color.fromARGB(14, 24, 24, 24), // Make color semi-transparent
+                    ),
+                  ),
+                ),
+              )
+            : null,
       body: Row(
         children: [
 
           // Sidebar
-          Expanded(
+          currentWidth > 1400 ? Expanded(
             flex: 0,
             child: Padding(
               padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
@@ -143,7 +239,7 @@ Route _HomeRoute() {
                         children: [
                             ClipOval(
                               child: Image.asset(
-                                "lib/assets/thrive_logo.png",
+                                "lib/assets/Luis.png",
                                 width: 45,
                                 height: 45,
                                 ),
@@ -152,7 +248,7 @@ Route _HomeRoute() {
                             const SizedBox(width: 13,),
 
                           const Text(
-                            "Thrive Engineer",
+                            "Luis Schröder",
                             style: TextStyle(
                               color: Color.fromARGB(255, 206, 205, 195),
                               fontWeight: FontWeight.w600,
@@ -183,21 +279,37 @@ Route _HomeRoute() {
 
                         MyButton(text: "Portfolio", icon: Icons.folder_rounded, onTap: () {
                           Navigator.of(context).push(_HomeRoute());
-                        },
+                        }, sizedBox: 9,
                        ),
 
                        const SizedBox(height: 10,),
 
                        MyButton(text: "About", icon: Icons.info_rounded, onTap: () {
                         Navigator.of(context).push(_AboutRoute());
-                       }),
+                       }, sizedBox: 9,
+                       ),
 
                        const SizedBox(height: 10,),
 
                        MyButton(text: "Resume", icon: Icons.description_rounded, onTap: ()
                        {
                         Navigator.of(context).push(_PortfolioRoute());
-                       },
+                       }, sizedBox: 9,
+                       ),
+
+                       const SizedBox(height: 15,),
+
+                        Divider(
+                          color: Color.fromARGB(255, 41, 40, 38),
+                          indent: 0,
+                          endIndent: 0,
+                        ),
+
+                        const SizedBox(height: 15,),
+
+                        MyTextAssets(name: "lib/assets/myle_logo.png", text: "Myle", onTap: () {
+                         _launchUrlMyle();
+                       }
                        ),
 
                        const SizedBox(height: 15,),
@@ -302,19 +414,19 @@ Route _HomeRoute() {
                 ),
               ),
             ),
-          ),
+          ) : SizedBox(width: 0,),
 
           // Site
           Expanded(
               child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 105),
+                      padding: const EdgeInsets.only(top: 105, left: 25, right: 25),
                       child: Column(
                         children: [
                         Text(
                           "Luis Schröder",
                           style: TextStyle(
-                            fontSize: 50,
+                            fontSize: currentWidth > 800 ? 50 : currentWidth > 480 ? 32 : 24,
                             color: Color.fromARGB(255, 206, 205, 195),
                           ),
                           ),
@@ -322,7 +434,7 @@ Route _HomeRoute() {
                           Text(
                             "Flutter Cross Platform Developer",
                             style: TextStyle(
-                              fontSize: 25,
+                              fontSize: currentWidth > 800 ? 25 : currentWidth > 480 ? 18 : 14,
                               color: Color.fromARGB(255, 135, 133, 128),
                               fontWeight: FontWeight.w200
                             ),
